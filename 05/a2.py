@@ -1,0 +1,81 @@
+import sys; sys.dont_write_bytecode = True; from utils import *
+"""
+To do: ensure Code Runner works (in WSL), have preloaded the day and input in Chrome,
+saved input into the folder, have utils on the side, collapse regions
+Strings, lists, dicts:
+lmap, ints, positive_ints, floats, positive_floats, words, keyvalues
+
+Algorithms:
+bisect, binary_search, hamming_distance, edit_distance
+
+Data structures:
+Linked, UnionFind
+use deque for queue: q[0], q.append and q.popleft
+
+List/Vector operations:
+GRID_DELTA, OCT_DELTA
+lget, lset, fst, snd
+padd, pneg, psub, pmul, pdot, pdist1, pdist2sq, pdist2
+
+Matrices:
+matmat, matvec, matexp
+
+Previous problems:
+knot
+
+Dict things:
+dict.keys()
+dict.values()
+dict.items()
+"""
+
+def do_case(inp: str, sample=False):
+    # READ THE PROBLEM FROM TOP TO BOTTOM OK
+    def sprint(*a, **k): sample and print(*a, **k)
+    lines = inp.splitlines()
+    rgs = [tuple(map(int, r.split('-'))) for r in itertools.takewhile(str.strip, lines)]
+
+    rgs = sorted(rgs, key=lambda x: x[0])
+    merged = [rgs[0]]
+
+    for l, r in rgs[1:]:
+        if l <= merged[-1][1]:
+            merged[-1] = (merged[-1][0], max(r, merged[-1][1]))
+        else:
+            merged.append((l, r))
+    print(sum([r - l + 1 for l, r in merged]))
+    return  # RETURNED VALUE DOESN'T DO ANYTHING, PRINT THINGS INSTEAD
+
+
+# 3-5
+# 10-14
+# 12-18
+# 16-20
+
+run_samples_and_actual([
+# Part 1
+r"""
+3-5
+10-14
+16-20
+12-18
+
+1
+5
+8
+11
+17
+32
+""",r"""
+
+""",r"""
+
+""",r"""
+
+""",r"""
+
+""",r"""
+
+""",r"""
+
+"""], do_case)
